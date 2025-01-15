@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.content{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: auto;
+    width: 500px;
+}
+
+.field{
+    border: 2px solid black;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+}
