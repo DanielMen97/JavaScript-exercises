@@ -1,63 +1,76 @@
 const $ = (el) => document.querySelector(el);
 const $$ = (els) => document.querySelectorAll(els);
 
-const player1 = 0;
-const player2 = 1;
-let currentPlayer = player1;
+const playerOne = 0;
+const playerTwo = 1;
+let currentPlayer = playerOne;
 
 const listFields = $$(".content .field");
-let currentPositions = []
+let currentPositions = [];
+const winnerPositions = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
 listFields.forEach((element) => {
   element.addEventListener("click", function () {
-    if(element.style.backgroundColor === ''){
-      if (currentPlayer === player1) {
+    if (element.style.backgroundColor === "") {
+      if (currentPlayer === playerOne) {
         element.style.backgroundColor = "red";
-        saveCurrentPosition()
-        currentPlayer = player2;
+        currentPlayer = playerTwo;
       } else {
         element.style.backgroundColor = "blue";
-        saveCurrentPosition()
-        currentPlayer = player1;
+        currentPlayer = playerOne;
       }
+      saveCurrentPosition();
     }
-    findWinner()
+    console.log(findWinner());
   });
 });
 
 function saveCurrentPosition() {
-    const positions = currentPositions.map((element) => element.posicion)
-    listFields.forEach((element, index) => {
-        if(element.style.backgroundColor !== '' && !positions.includes(index)){
-            currentPositions.push({color: element.style.backgroundColor, posicion: index})
-        }
-    })
+  const positions = currentPositions.map((element) => element.posicion);
+  listFields.forEach((element, index) => {
+    if (element.style.backgroundColor !== "" && !positions.includes(index)) {
+      currentPositions.push({
+        color: element.style.backgroundColor,
+        posicion: index,
+      });
+    }
+  });
 }
 
 function findWinner() {
-    if(currentPositions.length >= 5){
-        const fieldPlayer1 = currentPositions.map(element => {
-            return element.color === 'red' ? element.posicion : null
-        }).filter(element => element !== null)
-        const fieldPlayer2 = currentPositions.map(element => {
-            return element.color === 'blue' ? element.posicion : null
-        }).filter(element => element !== null)
+  if (currentPositions.length >= 5) {
+    const fieldsPlayerOne = currentPositions
+      .map(element => {
+        return element.color === "red" ? element.posicion : null;
+      })
+      .filter(element => element !== null);
+    const fieldsPlayerTwo = currentPositions
+      .map(element => {
+        return element.color === "blue" ? element.posicion : null;
+      })
+      .filter(element => element !== null);
+    for (let index = 0; index < winnerPositions.length; index++) {
+      const element = winnerPositions[index];
+      if (
+        element.every(field => fieldsPlayerOne.includes(field))
+      )
+        return "Gano Jugador 1";
+      if (
+        fieldsPlayerTwo.length >= element.length &&
+        element.every(field => fieldsPlayerTwo.includes(field))
+      )
+        return "Gano Jugador 2";
+      if (fieldsPlayerOne.length + fieldsPlayerTwo.length === 9)
+        return "Empate";
     }
+  }
 }
-
-// const winner = [
-//     [[0,0],[0,1],[0,2]],
-//     [[1,0],[1,1],[1,2]],
-//     [[2,0],[2,1],[2,2]],
-//     [[0,0],[1,0],[2,0]],
-//     [[0,1],[1,1],[2,1]],
-//     [[0,2],[1,2],[2,2]],
-//     [[0,0],[1,1],[2,2]],
-//     [[0,2],[1,1],[2,0]]
-// ]
-
-const winnerPositions = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
-]
