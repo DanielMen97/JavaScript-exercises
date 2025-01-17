@@ -21,6 +21,7 @@ const winnerPositions = [
 
 listFields.forEach((element) => {
   element.addEventListener("click", function () {
+    //TODO: Sacar toda esta funcion aparte.
     if (element.style.backgroundColor === "" && !winner) {
       if (currentPlayer === playerOne) {
         element.style.backgroundColor = "red";
