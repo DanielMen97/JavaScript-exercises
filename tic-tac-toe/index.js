@@ -5,6 +5,8 @@ const playerOne = 1;
 const playerTwo = 2;
 let currentPlayer = playerOne;
 let winner = 0;
+let playerOneColor = 'red'
+let playerTwoColor = 'blue'
 
 const listFields = $$(".field");
 let currentPositions = [];
@@ -19,26 +21,38 @@ const winnerPositions = [
   [2, 4, 6],
 ];
 
+const currentShift = $('.shift')
+
+function showCurrentShift() {
+  if(!winner){
+    currentShift.innerText = `Turno Actual: ${currentPlayer}`
+  }
+}
+showCurrentShift() 
+
 listFields.forEach((element) => {
-  element.addEventListener("click", function () {
-    //TODO: Sacar toda esta funcion aparte.
-    if (element.style.backgroundColor === "" && !winner) {
-      if (currentPlayer === playerOne) {
-        element.style.backgroundColor = "red";
-        currentPlayer = playerTwo;
-      } else {
-        element.style.backgroundColor = "blue";
-        currentPlayer = playerOne;
-      }
-      saveCurrentPosition();
-      // TODO: Al enviar un pr nunca se pasa con console.log()
-      const hasWinner = findWinner();
-      if (hasWinner) {
-        alert(findWinner());
-      }
-    }
-  });
+  //TODO: Sacar toda esta funcion aparte. (SOLUCIONADO)
+  element.addEventListener("click", () => paintField(element));
 });
+
+function paintField(element) {
+  if (element.style.backgroundColor === "" && !winner) {
+    if (currentPlayer === playerOne) {
+      element.style.backgroundColor = playerOneColor;
+      saveCurrentPosition();
+      currentPlayer = playerTwo;
+      findWinner(playerOneColor, playerOne);
+    } else {
+      element.style.backgroundColor = playerTwoColor;
+      saveCurrentPosition();
+      currentPlayer = playerOne;
+      findWinner(playerTwoColor, playerTwo);
+    }
+    // TODO: Al enviar un pr nunca se pasa con console.log() (SOLUCIONADO)
+  }
+  showCurrentShift()
+
+}
 
 function saveCurrentPosition() {
   const positions = currentPositions.map((element) => element.posicion);
@@ -52,44 +66,38 @@ function saveCurrentPosition() {
   });
 }
 
-function findWinner() {
+function findWinner(color, player) {
   if (currentPositions.length >= 5) {
     // TODO: Hay una manera mas optima de revisar los jugadores,
     // aca esta validando siempre los dos jugadores, quiero que ahora solo valide si el jugador actual esta jugando
-    // ya gano pero solo valide un jugador.
+    // ya gano pero solo valide un jugador. (SOLUCIONADO)
 
-    const fieldsPlayerOne = currentPositions
+      const fieldsCurrentPlayer = currentPositions
       .map((element) => {
-        return element.color === "red" ? element.posicion : null;
-      })
-      .filter((element) => element !== null);
-    const fieldsPlayerTwo = currentPositions
-      .map((element) => {
-        return element.color === "blue" ? element.posicion : null;
+        return element.color === color ? element.posicion : null;
       })
       .filter((element) => element !== null);
 
     for (let index = 0; index < winnerPositions.length; index++) {
       const element = winnerPositions[index];
-      if (element.every((field) => fieldsPlayerOne.includes(field))) {
-        winner = playerOne;
-        return "Gano Jugador 1";
-      }
       if (
-        fieldsPlayerTwo.length >= element.length &&
-        element.every((field) => fieldsPlayerTwo.includes(field))
+        fieldsCurrentPlayer.length >= element.length &&
+        element.every((field) => fieldsCurrentPlayer.includes(field))
       ) {
-        winner = playerTwo;
-        return "Gano Jugador 2";
+        winner = player
       }
-      if (fieldsPlayerOne.length + fieldsPlayerTwo.length === 9 && !winner)
-        return "Empate";
     }
+    if (winner) winner === 1 ? showWinner('Gano Jugador X') : showWinner('Gano Jugador O');
+    if (!winner && currentPositions.length === 9) showWinner('Empate')
   }
 }
 
+function showWinner(text) {
+  return setTimeout(() => alert(text))
+}
+
 /*
- * TODO: Como debe eliminar el console.log ahora quiero que en la pantalla del usuario le muestre si ya gano o si es empate.
- * TODO: Tambien quiero que en la pantalla del usuario ahora muestre el turno del jugador actual. (En estos momentos solo se el turno de quien es al darle a alguna casilla y me pone el color).
+ * TODO: Como debe eliminar el console.log ahora quiero que en la pantalla del usuario le muestre si ya gano o si es empate. (SOLUCIONADO)
+ * TODO: Tambien quiero que en la pantalla del usuario ahora muestre el turno del jugador actual. (En estos momentos solo se el turno de quien es al darle a alguna casilla y me pone el color). (SOLUCIONADO)
  * TODO: Cambiar el color por el X o el O y que el usuario pueda seleccionar cual quiere.
  */
