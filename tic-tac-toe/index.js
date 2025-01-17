@@ -1,11 +1,12 @@
 const $ = (el) => document.querySelector(el);
 const $$ = (els) => document.querySelectorAll(els);
 
-const playerOne = 0;
-const playerTwo = 1;
+const playerOne = 1;
+const playerTwo = 2;
 let currentPlayer = playerOne;
+let winner = 0;
 
-const listFields = $$(".content .field");
+const listFields = $$(".field");
 let currentPositions = [];
 const winnerPositions = [
   [0, 1, 2],
@@ -20,7 +21,7 @@ const winnerPositions = [
 
 listFields.forEach((element) => {
   element.addEventListener("click", function () {
-    if (element.style.backgroundColor === "") {
+    if (element.style.backgroundColor === "" && !winner) {
       if (currentPlayer === playerOne) {
         element.style.backgroundColor = "red";
         currentPlayer = playerTwo;
@@ -29,8 +30,8 @@ listFields.forEach((element) => {
         currentPlayer = playerOne;
       }
       saveCurrentPosition();
+      console.log(findWinner());
     }
-    console.log(findWinner());
   });
 });
 
@@ -49,27 +50,29 @@ function saveCurrentPosition() {
 function findWinner() {
   if (currentPositions.length >= 5) {
     const fieldsPlayerOne = currentPositions
-      .map(element => {
+      .map((element) => {
         return element.color === "red" ? element.posicion : null;
       })
-      .filter(element => element !== null);
+      .filter((element) => element !== null);
     const fieldsPlayerTwo = currentPositions
-      .map(element => {
+      .map((element) => {
         return element.color === "blue" ? element.posicion : null;
       })
-      .filter(element => element !== null);
+      .filter((element) => element !== null);
     for (let index = 0; index < winnerPositions.length; index++) {
       const element = winnerPositions[index];
-      if (
-        element.every(field => fieldsPlayerOne.includes(field))
-      )
+      if (element.every((field) => fieldsPlayerOne.includes(field))) {
+        winner = playerOne;
         return "Gano Jugador 1";
+      }
       if (
         fieldsPlayerTwo.length >= element.length &&
-        element.every(field => fieldsPlayerTwo.includes(field))
-      )
+        element.every((field) => fieldsPlayerTwo.includes(field))
+      ) {
+        winner = playerTwo;
         return "Gano Jugador 2";
-      if (fieldsPlayerOne.length + fieldsPlayerTwo.length === 9)
+      }
+      if (fieldsPlayerOne.length + fieldsPlayerTwo.length === 9 && !winner)
         return "Empate";
     }
   }
