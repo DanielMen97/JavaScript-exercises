@@ -30,6 +30,7 @@ listFields.forEach((element) => {
         currentPlayer = playerOne;
       }
       saveCurrentPosition();
+      // TODO: Al enviar un pr nunca se pasa con console.log()
       console.log(findWinner());
     }
   });
@@ -49,6 +50,10 @@ function saveCurrentPosition() {
 
 function findWinner() {
   if (currentPositions.length >= 5) {
+    // TODO: Hay una manera mas optima de revisar los jugadores,
+    // aca esta validando siempre los dos jugadores, quiero que ahora solo valide si el jugador actual esta jugando
+    // ya gano pero solo valide un jugador.
+
     const fieldsPlayerOne = currentPositions
       .map((element) => {
         return element.color === "red" ? element.posicion : null;
@@ -59,6 +64,7 @@ function findWinner() {
         return element.color === "blue" ? element.posicion : null;
       })
       .filter((element) => element !== null);
+
     for (let index = 0; index < winnerPositions.length; index++) {
       const element = winnerPositions[index];
       if (element.every((field) => fieldsPlayerOne.includes(field))) {
@@ -77,3 +83,9 @@ function findWinner() {
     }
   }
 }
+
+/*
+ * TODO: Como debe eliminar el console.log ahora quiero que en la pantalla del usuario le muestre si ya gano o si es empate.
+ * TODO: Tambien quiero que en la pantalla del usuario ahora muestre el turno del jugador actual. (En estos momentos solo se el turno de quien es al darle a alguna casilla y me pone el color).
+ * TODO: Tambien quiero que antes de que el juego empiece el jugador tenga la posibilidad de elegir el color que quiere.
+*/
