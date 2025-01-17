@@ -32,7 +32,10 @@ listFields.forEach((element) => {
       }
       saveCurrentPosition();
       // TODO: Al enviar un pr nunca se pasa con console.log()
-      console.log(findWinner());
+      const hasWinner = findWinner();
+      if (hasWinner) {
+        alert(findWinner());
+      }
     }
   });
 });
@@ -88,5 +91,5 @@ function findWinner() {
 /*
  * TODO: Como debe eliminar el console.log ahora quiero que en la pantalla del usuario le muestre si ya gano o si es empate.
  * TODO: Tambien quiero que en la pantalla del usuario ahora muestre el turno del jugador actual. (En estos momentos solo se el turno de quien es al darle a alguna casilla y me pone el color).
- * TODO: Tambien quiero que antes de que el juego empiece el jugador tenga la posibilidad de elegir el color que quiere.
-*/
+ * TODO: Cambiar el color por el X o el O y que el usuario pueda seleccionar cual quiere.
+ */
