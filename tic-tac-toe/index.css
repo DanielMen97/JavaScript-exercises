@@ -1,19 +1,77 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.container{
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: auto;
-    width: 500px;
+.game,
+.buttons,
+.field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.field{
-    border: 2px solid black;
-    width: 100px;
-    height: 100px;
-    background-color: white;
+.game {
+  flex-direction: column;
+  width: 100%;
+  height: 100dvh;
+  background-color: #83c2e9;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+  margin: 20px;
+}
+
+.field {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  color: white;
+  font-size: 50px;
+}
+
+.buttons {
+  gap: 30px;
+  margin: 10px;
+}
+
+.button {
+  width: 50px;
+  height: 50px;
+  color: white;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px 0 rgba(120, 120, 120, 0.75);
+}
+
+.backgroung-pine {
+  background-color: rgb(52, 103, 92);
+}
+
+.backgroung-fields {
+  background-color: rgb(179, 193, 0);
+}
+
+.button:active {
+  box-shadow: -2px -2px 4px 0 rgba(120, 120, 120, 0.75);
+}
+
+.button,
+.field {
+  border-radius: 10px;
+}
+
+.title {
+  height: 36px;
+}
+
+.title,
+.shift {
+  color: #2b3a67;
 }
