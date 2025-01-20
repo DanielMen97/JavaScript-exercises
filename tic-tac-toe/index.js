@@ -97,11 +97,13 @@ function findWinner() {
 
     const fieldsCurrentPlayer = getFieldsCurrentPlayer();
 
+    
     for (let index = 0; index < winnerPositions.length; index++) {
       const element = winnerPositions[index];
+      const isWinnerPositions = element.every((field) => fieldsCurrentPlayer.includes(field))
       if (
         fieldsCurrentPlayer.length >= element.length &&
-        element.every((field) => fieldsCurrentPlayer.includes(field))
+        isWinnerPositions
       ) {
         winner = currentPlayer;
       }
