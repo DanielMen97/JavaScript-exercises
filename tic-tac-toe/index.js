@@ -1,6 +1,6 @@
 const $ = (el) => document.querySelector(el);
 const $$ = (els) => document.querySelectorAll(els);
-const $$$ = (el, cl) => el.classList.add(cl);
+const addClassList = (el, cl) => el.classList.add(cl);
 const $$$$ = (el, cl) => el.getAttribute(cl);
 const fieldColor = () =>
   currentPlayer === "X" ? "backgroung-pine" : "backgroung-fields";
@@ -53,7 +53,7 @@ function paintField(element) {
   const fieldClass = $$$$(element, "class");
   if (fieldClass.length === 5 && !winner && playerOne) {
     const color = fieldColor();
-    $$$(element, color);
+    addClassList(element, color);
     element.innerText = currentPlayer;
     saveCurrentPosition();
     findWinner();
