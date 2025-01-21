@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "League Spartan", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
 }
 
 :root{
@@ -18,45 +24,120 @@
     --second-text-color: hsl(0, 0%, 100%);
 }
 
-:theme-ligth{
-    --main-bg-color: hsl(0, 0%, 90%);
-    --keypad-bg-color: hsl(0, 5%, 81%);
-    --screen-bg-color: hsl(0, 0%, 93%);
-    --first-key-bg-color: hsl(185, 42%, 37%);
-    --first-key-shadow-color: hsl(185, 58%, 25%);
-    --second-key-bg-color: hsl(25, 98%, 40%);
-    --second-key-shadow-color: hsl(25, 99%, 27%);
-    --third-key-bg-color: hsl(45, 7%, 89%);
-    --third-key-shadow-color: hsl(35, 11%, 61%);
-    --first-text-color: hsl(60, 10%, 19%);
-    --second-text-color: hsl(0, 0%, 100%);
-}
+/* @media () {    
+    :root{
+        --main-bg-color: hsl(0, 0%, 90%);
+        --keypad-bg-color: hsl(0, 5%, 81%);
+        --screen-bg-color: hsl(0, 0%, 93%);
+        --first-key-bg-color: hsl(185, 42%, 37%);
+        --first-key-shadow-color: hsl(185, 58%, 25%);
+        --second-key-bg-color: hsl(25, 98%, 40%);
+        --second-key-shadow-color: hsl(25, 99%, 27%);
+        --third-key-bg-color: hsl(45, 7%, 89%);
+        --third-key-shadow-color: hsl(35, 11%, 61%);
+        --first-text-color: hsl(60, 10%, 19%);
+        --second-text-color: hsl(0, 0%, 100%);
+    }
+} */
 
-:theme-galaxy{
-    --main-bg-color: hsl(268, 75%, 9%);
-    --keypad-bg-color: hsl(268, 71%, 12%);
-    --screen-bg-color: hsl(268, 71%, 12%);
-    --first-key-bg-color: hsl(281, 89%, 26%);
-    --first-key-shadow-color: hsl(285, 91%, 52%);
-    --second-key-bg-color: hsl(176, 100%, 44%);
-    --second-key-shadow-color: hsl(177, 92%, 70%);
-    --third-key-bg-color: hsl(268, 47%, 21%);
-    --third-key-shadow-color: hsl(290, 70%, 36%);
-    --first-text-color: hsl(52, 100%, 62%);
-    --second-text-color: hsl(198, 20%, 13%);
-    --third-text-color: hsl(0, 0%, 100%);
-}
+/* @media () { 
+    :root{
+        --main-bg-color: hsl(268, 75%, 9%);
+        --keypad-bg-color: hsl(268, 71%, 12%);
+        --screen-bg-color: hsl(268, 71%, 12%);
+        --first-key-bg-color: hsl(281, 89%, 26%);
+        --first-key-shadow-color: hsl(285, 91%, 52%);
+        --second-key-bg-color: hsl(176, 100%, 44%);
+        --second-key-shadow-color: hsl(177, 92%, 70%);
+        --third-key-bg-color: hsl(268, 47%, 21%);
+        --third-key-shadow-color: hsl(290, 70%, 36%);
+        --first-text-color: hsl(52, 100%, 62%);
+        --second-text-color: hsl(198, 20%, 13%);
+        --third-text-color: hsl(0, 0%, 100%);
+    }
+} */
 .center{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .calc{
     width: 100%;
     height: 100dvh;
     background-color: var(--main-bg-color);
 }
 
+.calc__container{
+    width: 440px;
+}
+
 .calc__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.calc__theme-selector{
+    display: flex;
+}
+
+.calc__display{
+    display: flex;
+    width: 100%;
+    height: 110px;
+    background-color: var(--screen-bg-color);
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.calc__buttons{
+    border-radius: 8px;
+    background-color: var(--keypad-bg-color);
+    padding: 30px;
+}
+
+.calc__buttons--numbers{
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 20px;
+}
+
+.calc__button{
+    cursor: pointer;
+    height: 50px;
+    font-size: 32px;
+    border-radius: 8px;
+    border: none;
+    color: var(--first-text-color);
+    background-color: var(--third-key-bg-color);
+    box-shadow: inset 0px -4px 0px 0px var(--third-key-shadow-color);
+}
+
+.calc__button--equals{
+    color: var(--second-text-color);
+    background-color: var(--second-key-bg-color);
+    box-shadow: inset 0px -4px 0px 0px var(--second-key-shadow-color);
+}
+
+.calc__button--clear{
+    color: var(--second-text-color);
+    background-color: var(--first-key-bg-color);
+    box-shadow: inset 0px -4px 0px 0px var(--first-key-shadow-color);
+}
+
+.calc__button:active{
+    box-shadow: none;
+}
+
+.calc__button--reset{
     
+}
+
+.calc__buttons--operations{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
 }
