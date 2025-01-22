@@ -1,94 +1,92 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap");
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "League Spartan", serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "League Spartan", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
 }
+
 
 :root {
-  --main-bg-color: hsl(222, 26%, 31%);
-  --keypad-bg-color: hsl(223, 31%, 20%);
-  --screen-bg-color: hsl(224, 36%, 15%);
-  --first-key-bg-color: hsl(225, 21%, 49%);
-  --first-key-shadow-color: hsl(224, 28%, 35%);
-  --second-key-bg-color: hsl(6, 63%, 50%);
-  --second-key-shadow-color: hsl(6, 70%, 34%);
-  --third-key-bg-color: hsl(30, 25%, 89%);
-  --third-key-shadow-color: hsl(28, 16%, 65%);
-  --first-text-color: hsl(221, 14%, 31%);
-  --second-text-color: hsl(0, 0%, 100%);
-  --third-text-color: hsl(0, 0%, 100%);
+    --main-bg-color: hsl(222, 26%, 31%);
+    --keypad-bg-color: hsl(223, 31%, 20%);
+    --screen-bg-color: hsl(224, 36%, 15%);
+    --first-key-bg-color: hsl(225, 21%, 49%);
+    --first-key-shadow-color: hsl(224, 28%, 35%);
+    --second-key-bg-color: hsl(6, 63%, 50%);
+    --second-key-shadow-color: hsl(6, 70%, 34%);
+    --third-key-bg-color: hsl(30, 25%, 89%);
+    --third-key-shadow-color: hsl(28, 16%, 65%);
+    --first-text-color: hsl(221, 14%, 31%);
+    --second-text-color: hsl(0, 0%, 100%);
+    --third-text-color: hsl(0, 0%, 100%);
 }
 
-/* @media () {    
-    :root{
-        --main-bg-color: hsl(0, 0%, 90%);
-        --keypad-bg-color: hsl(0, 5%, 81%);
-        --screen-bg-color: hsl(0, 0%, 93%);
-        --first-key-bg-color: hsl(185, 42%, 37%);
-        --first-key-shadow-color: hsl(185, 58%, 25%);
-        --second-key-bg-color: hsl(25, 98%, 40%);
-        --second-key-shadow-color: hsl(25, 99%, 27%);
-        --third-key-bg-color: hsl(45, 7%, 89%);
-        --third-key-shadow-color: hsl(35, 11%, 61%);
-        --first-text-color: hsl(60, 10%, 19%);
-        --second-text-color: hsl(0, 0%, 100%);
-        --third-text-color: hsl(60, 10%, 19%);
-    }
-} */
+:root[data-theme='ligth'] {
+    --main-bg-color: hsl(0, 0%, 90%);
+    --keypad-bg-color: hsl(0, 5%, 81%);
+    --screen-bg-color: hsl(0, 0%, 93%);
+    --first-key-bg-color: hsl(185, 42%, 37%);
+    --first-key-shadow-color: hsl(185, 58%, 25%);
+    --second-key-bg-color: hsl(25, 98%, 40%);
+    --second-key-shadow-color: hsl(25, 99%, 27%);
+    --third-key-bg-color: hsl(45, 7%, 89%);
+    --third-key-shadow-color: hsl(35, 11%, 61%);
+    --first-text-color: hsl(60, 10%, 19%);
+    --second-text-color: hsl(0, 0%, 100%);
+    --third-text-color: hsl(60, 10%, 19%);
+}
 
-/* @media () { 
-    :root{
-        --main-bg-color: hsl(268, 75%, 9%);
-        --keypad-bg-color: hsl(268, 71%, 12%);
-        --screen-bg-color: hsl(268, 71%, 12%);
-        --first-key-bg-color: hsl(281, 89%, 26%);
-        --first-key-shadow-color: hsl(285, 91%, 52%);
-        --second-key-bg-color: hsl(176, 100%, 44%);
-        --second-key-shadow-color: hsl(177, 92%, 70%);
-        --third-key-bg-color: hsl(268, 47%, 21%);
-        --third-key-shadow-color: hsl(290, 70%, 36%);
-        --first-text-color: hsl(52, 100%, 62%);
-        --second-text-color: hsl(198, 20%, 13%);
-        --third-text-color: hsl(52, 100%, 62%);
-    }
-} */
+:root[data-theme='galaxy']  {
+    --main-bg-color: hsl(268, 75%, 9%);
+    --keypad-bg-color: hsl(268, 71%, 12%);
+    --screen-bg-color: hsl(268, 71%, 12%);
+    --first-key-bg-color: hsl(281, 89%, 26%);
+    --first-key-shadow-color: hsl(285, 91%, 52%);
+    --second-key-bg-color: hsl(176, 100%, 44%);
+    --second-key-shadow-color: hsl(177, 92%, 70%);
+    --third-key-bg-color: hsl(268, 47%, 21%);
+    --third-key-shadow-color: hsl(290, 70%, 36%);
+    --first-text-color: hsl(52, 100%, 62%);
+    --second-text-color: hsl(198, 20%, 13%);
+    --third-text-color: hsl(52, 100%, 62%);
+}
+
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .calc {
-  width: 100%;
-  height: 100dvh;
-  background-color: var(--main-bg-color);
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--main-bg-color);
 }
 
 .calc__container {
-  width: 440px;
+    width: 440px;
 }
 
 .calc__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.calc__title{
+.calc__title {
     color: var(--third-text-color);
 }
 
 .calc__theme {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .calc__theme-options {
@@ -96,122 +94,123 @@
     gap: 10px;
 }
 
-.calc__theme-option, .calc__theme-title{
+.calc__theme-option,
+.calc__theme-title {
     font-size: 10px;
     color: var(--third-text-color);
     letter-spacing: 1px;
 }
 
 .calc__theme-inputs {
-  position: relative;
-  height: 21px;
-  width: 51px;
-  background-color: var(--keypad-bg-color);
-  border-radius: 32px;
+    position: relative;
+    height: 21px;
+    width: 51px;
+    background-color: var(--keypad-bg-color);
+    border-radius: 32px;
 }
 
 .calc__theme-label {
-  position: relative;
-  z-index: 2;
-  float: left;
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
 }
 
 .calc__theme-input {
-  display: none;
+    display: none;
 }
 
-.calc__theme-input:checked + .calc__theme-label--dark ~ .calc__theme-span {
-  transform: translateX(0%);
+.calc__theme-input:checked+.calc__theme-label--dark~.calc__theme-span {
+    transform: translateX(0%);
 }
 
-.calc__theme-input:checked + .calc__theme-label--light ~ .calc__theme-span {
-  transform: translateX(100%);
+.calc__theme-input:checked+.calc__theme-label--light~.calc__theme-span {
+    transform: translateX(100%);
 }
 
-.calc__theme-input:checked + .calc__theme-label--galaxy ~ .calc__theme-span {
-  transform: translateX(200%);
+.calc__theme-input:checked+.calc__theme-label--galaxy~.calc__theme-span {
+    transform: translateX(200%);
 }
 
 .calc__theme-span {
-  position: absolute;
-  z-index: 1;
-  top: 3px;
-  left: 3px;
-  display: block;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: var(--second-key-bg-color);
-  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    left: 3px;
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--second-key-bg-color);
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .calc__display {
-  display: flex;
-  width: 100%;
-  height: 110px;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: var(--screen-bg-color);
-  border-radius: 8px;
-  margin: 10px 0;
-  padding: 13px 20px 0;
+    display: flex;
+    width: 100%;
+    height: 110px;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: var(--screen-bg-color);
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 13px 20px 0;
 }
 
 .calc__display-text {
-  overflow: hidden;
-  direction: rtl;
-  font-size: 68px;
-  color: var(--third-text-color);
+    overflow: hidden;
+    direction: rtl;
+    font-size: 68px;
+    color: var(--third-text-color);
 }
 
 .calc__buttons {
-  border-radius: 8px;
-  background-color: var(--keypad-bg-color);
-  padding: 30px;
+    border-radius: 8px;
+    background-color: var(--keypad-bg-color);
+    padding: 30px;
 }
 
 .calc__buttons--numbers {
-  display: grid;
-  grid-template-columns: repeat(4, 80px);
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 20px;
 }
 
 .calc__button {
-  cursor: pointer;
-  height: 50px;
-  font-size: 32px;
-  border-radius: 8px;
-  border: none;
-  color: var(--first-text-color);
-  background-color: var(--third-key-bg-color);
-  box-shadow: inset 0px -4px 0px 0px var(--third-key-shadow-color);
+    cursor: pointer;
+    height: 50px;
+    font-size: 32px;
+    border-radius: 8px;
+    border: none;
+    color: var(--first-text-color);
+    background-color: var(--third-key-bg-color);
+    box-shadow: inset 0px -4px 0px 0px var(--third-key-shadow-color);
 }
 
 .calc__button:active {
-  box-shadow: none;
-  transform: translateY(3px);
+    box-shadow: none;
+    transform: translateY(3px);
 }
 
 .calc__buttons--control {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .calc__button--equals {
-  color: var(--second-text-color);
-  background-color: var(--second-key-bg-color);
-  box-shadow: inset 0px -4px 0px 0px var(--second-key-shadow-color);
-  font-size: 23px;
+    color: var(--second-text-color);
+    background-color: var(--second-key-bg-color);
+    box-shadow: inset 0px -4px 0px 0px var(--second-key-shadow-color);
+    font-size: 23px;
 }
 
 .calc__button--delete {
-  color: hsl(0, 0%, 100%);
-  background-color: var(--first-key-bg-color);
-  box-shadow: inset 0px -4px 0px 0px var(--first-key-shadow-color);
-  font-size: 23px;
+    color: hsl(0, 0%, 100%);
+    background-color: var(--first-key-bg-color);
+    box-shadow: inset 0px -4px 0px 0px var(--first-key-shadow-color);
+    font-size: 23px;
 }
