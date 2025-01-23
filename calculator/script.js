@@ -19,7 +19,6 @@ const operations = {
 
 const $ = (el) => document.querySelector(el);
 const $$ = (els) => document.querySelectorAll(els);
-
 const display = $(".calc__display-text");
 const numberButtons = $$(".numbers");
 const operationButtons = $$(".operations");
@@ -33,13 +32,13 @@ let currentOperation = "";
 
 numberButtons.forEach((element) => {
   element.addEventListener("click", function (e) {
-    const value = e.target.value;
+    const number = e.target.value;
     if (currentOperation) {
-      valueTwo = valueTwo + value;
-      display.innerText = valueTwo;
+      valueTwo = valueTwo + number;
+      display.innerText = Number(valueTwo);
     } else {
-      valueOne = valueOne + value;
-      display.innerText = valueOne;
+      valueOne = valueOne + number;
+      display.innerText = Number(valueOne);
     }
   });
 });
@@ -58,19 +57,31 @@ equalButton.addEventListener("click", function () {
       Number(valueOne),
       Number(valueTwo)
     );
-    display.innerText = result;
+    display.innerText = reduceDecimals(result.toString());
     valueOne = result.toString();
-    valueTwo = "";
-    currentOperation = "";
+    valueTwo = currentOperation = ""
   }
 });
 
 deleteButton.addEventListener("click", function () {
   if (currentOperation) {
-    valueTwo = valueTwo.slice(0, valueTwo.length - 1) 
-    display.innerText = valueTwo ? valueTwo : '0';
-  } else {
-    valueOne = valueOne.slice(0, valueOne.length - 1)
-    display.innerText = valueOne ? valueOne : '0';
+    valueTwo = valueTwo.slice(0, valueTwo.length - 1);
+    display.innerText = valueTwo ? valueTwo : "0";
+   } else {
+      valueOne = valueOne.slice(0, valueOne.length - 1);
+      display.innerText = valueOne ? valueOne : "0";
   }
 });
+
+resetButton.addEventListener("click", function () {
+  valueOne = valueTwo = currentOperation = "";
+  display.innerText = "0";
+});
+
+function reduceDecimals(n) {
+  const decimals = n.indexOf(".") + 1;
+  if (decimals > 0 && n.slice(decimals).length > 3) {
+    return n.slice(0, decimals + 3);
+  }
+  return n
+}
