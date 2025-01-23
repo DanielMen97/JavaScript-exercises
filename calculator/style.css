@@ -161,7 +161,6 @@
 
 .calc__display-text {
     overflow: hidden;
-    direction: rtl;
     font-size: 68px;
     color: var(--third-text-color);
 }
