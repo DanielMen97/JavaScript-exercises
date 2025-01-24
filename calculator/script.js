@@ -31,27 +31,33 @@ let valueTwo = "";
 let currentOperation = "";
 
 numberButtons.forEach((element) => {
-  element.addEventListener("click", function (e) {
-    const number = e.target.value;
-    if (currentOperation) {
-      valueTwo = valueTwo + number;
-      display.innerText = Number(valueTwo);
-    } else {
-      valueOne = valueOne + number;
-      display.innerText = Number(valueOne);
-    }
-  });
+  element.addEventListener("click", (e) => saveValues(e));
 });
+
+function saveValues(e) {
+  const number = e.target.value;
+  if (currentOperation) {
+    valueTwo = valueTwo + number;
+    display.innerText = Number(valueTwo);
+  } else {
+    valueOne = valueOne + number;
+    display.innerText = Number(valueOne);
+  }
+}
 
 operationButtons.forEach((element) => {
-  element.addEventListener("click", function (e) {
-    if (valueOne) {
-      currentOperation = e.target.value;
-    }
-  });
+  element.addEventListener("click", (e) => saveOperation(e));
 });
 
-equalButton.addEventListener("click", function () {
+function saveOperation(e) {
+  if (valueOne) {
+    currentOperation = e.target.value;
+  }
+}
+
+equalButton.addEventListener("click", getResult);
+
+function getResult() {
   if (valueOne && valueTwo && currentOperation) {
     const result = operations[currentOperation](
       Number(valueOne),
@@ -61,9 +67,11 @@ equalButton.addEventListener("click", function () {
     valueOne = result.toString();
     valueTwo = currentOperation = ""
   }
-});
+}
 
-deleteButton.addEventListener("click", function () {
+deleteButton.addEventListener("click", deleteNumber);
+
+function deleteNumber() {
   if (currentOperation) {
     valueTwo = valueTwo.slice(0, valueTwo.length - 1);
     display.innerText = valueTwo ? valueTwo : "0";
@@ -71,12 +79,14 @@ deleteButton.addEventListener("click", function () {
       valueOne = valueOne.slice(0, valueOne.length - 1);
       display.innerText = valueOne ? valueOne : "0";
   }
-});
+}
 
-resetButton.addEventListener("click", function () {
+resetButton.addEventListener("click", reset);
+
+function reset() {
   valueOne = valueTwo = currentOperation = "";
   display.innerText = "0";
-});
+}
 
 function reduceDecimals(n) {
   const decimals = n.indexOf(".") + 1;

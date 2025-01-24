@@ -41,7 +41,7 @@
     --third-text-color: hsl(60, 10%, 19%);
 }
 
-:root[data-theme='galaxy']  {
+:root[data-theme='galaxy'] {
     --main-bg-color: hsl(268, 75%, 9%);
     --keypad-bg-color: hsl(268, 71%, 12%);
     --screen-bg-color: hsl(268, 71%, 12%);
@@ -212,4 +212,35 @@
     background-color: var(--first-key-bg-color);
     box-shadow: inset 0px -4px 0px 0px var(--first-key-shadow-color);
     font-size: 23px;
+}
+
+@media (max-width: 375px) {
+    .calc__container {
+        width: 300px;
+    }
+
+    .calc__display-text{
+        font-size: 50px;
+    }
+
+    .calc__buttons {
+        padding: 20px;
+    }
+
+    .calc__button{
+        height: 56px;
+    }
+    .calc__buttons--numbers {
+        grid-template-columns: repeat(4, 56px);
+        gap: 12px;
+    }
+
+    .calc__buttons--control {
+        margin-top: 12px;
+        gap: 12px;
+    }
+
+    .calc__button--delete{
+        font-size: 18px;
+    }
 }
