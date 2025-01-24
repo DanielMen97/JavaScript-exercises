@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js"></script>
+</head>
+
+<body>
+  <main class="calc center">
+    <div class="calc__container">
+      <header class="calc__header">
+        <h2 class="calc__title">calc</h2>
+        <div class="calc__theme">
+          <p class="calc__theme-title">THEME</p>
+          <div class="calc__theme-selector">
+            <div class="calc__theme-options center">
+              <p class="calc__theme-option">1</p>
+              <p class="calc__theme-option">2</p>
+              <p class="calc__theme-option">3</p>
+            </div>
+            <div class="calc__theme-inputs">
+              <input id="dark" name="theme" type="radio" class="calc__theme-input dark" />
+              <label for="dark" class="calc__theme-label calc__theme-label--dark"></label>
+              <input id="ligth" name="theme" type="radio" class="calc__theme-input ligth" />
+              <label for="ligth" class="calc__theme-label calc__theme-label--light"></label>
+              <input id="galaxy" name="theme" type="radio" class="calc__theme-input galaxy" />
+              <label for="galaxy" class="calc__theme-label calc__theme-label--galaxy"></label>
+              <span class="calc__theme-span"></span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="calc__display">
+        <h2 class="calc__display-text">0</h2>
+      </section>
+      <section class="calc__buttons">
+        <div class="calc__buttons--numbers">
+          <button class="calc__button numbers" value="7">7</button>
+          <button class="calc__button numbers" value="8">8</button>
+          <button class="calc__button numbers" value="9">9</button>
+          <button class="calc__button calc__button--delete delete">
+            DEL
+          </button>
+          <button class="calc__button numbers" value="4">4</button>
+          <button class="calc__button numbers" value="5">5</button>
+          <button class="calc__button numbers" value="6">6</button>
+          <button class="calc__button operations" value="+">+</button>
+          <button class="calc__button numbers" value="1">1</button>
+          <button class="calc__button numbers" value="2">2</button>
+          <button class="calc__button numbers" value="3">3</button>
+          <button class="calc__button operations" value="-">-</button>
+          <button class="calc__button numbers" value=".">.</button>
+          <button class="calc__button numbers" value="0">0</button>
+          <button class="calc__button operations" value="/">/</button>
+          <button class="calc__button operations" value="*">x</button>
+        </div>
+        <div class="calc__buttons--control">
+          <button class="calc__button calc__button--delete reset">
+            RESET
+          </button>
+          <button class="calc__button calc__button--equals equals">=</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
