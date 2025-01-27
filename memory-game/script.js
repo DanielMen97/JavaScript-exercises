@@ -3,8 +3,6 @@ const $$ = (els) => document.querySelectorAll(els);
 const addClassList = (el,cl) => el.classList.add(cl) 
 
 const item = $$(".fa-solid");
-const numbers = getNumbers(16);
-const numbersCopy = [...numbers];
 const cells = [];
 const iconList = [
     "fa-code",
@@ -24,26 +22,51 @@ const iconList = [
     "fa-tree",
     "fa-droplet",
 ];
-const icons = getIcons(16)
-const iconsCopy = [...icons]
+const theme = $$('.theme')
+const players = $$('.players')
+const size = $$('.size')
 
-function getNumbers(length) {
-  const numbers = [];
-  for (let index = 0; index < length; index++) {
-    const number = length / 2 <= index ? length - index : index + 1;
-    numbers.push(number);
-  }
-  return numbers;
+// let theme1 = ''
+
+// theme.forEach((element) => {
+//   if (element.checked) {
+//     theme1 = element.value
+//   }
+// })
+
+function getSettings(array) {
+  array.forEach((element) => {
+    if (element.checked) {
+      return element.value
+    }
+    element.addEventListener('click', function (e) {
+      return e.target.value
+    })
+  })
 }
 
-function getIcons(length) {
-  const icons = [];
+// getSettings(theme);
+// getSettings(players);
+// getSettings(size);
+
+const themeSelect = getSettings(theme)
+const playersSelect = getSettings(players)
+const sizeSelect = getSettings(size)
+const itemsList = getItems(16)
+const itemsListCopy = [...itemsList]
+
+function getItems(length) {
+  const newArray = []
+  let item = ''
   for (let index = 0; index < length; index++) {
-    const icon =
-      length / 2 <= index ? iconList[length - index] : iconList[index + 1];
-    icons.push(icon);
+    if (themeSelect === 'numbers') {
+      item = length / 2 <= index ? length - index : index + 1
+    } else {
+      item = length / 2 <= index ? iconList[length - index] : iconList[index + 1]
+    }
+    newArray.push(item)
   }
-  return icons;
+  return newArray
 }
 
 function getRandomIndex(min, max) {
@@ -51,26 +74,13 @@ function getRandomIndex(min, max) {
 }
 
 item.forEach((element, index) => {
-  const maxIndex = icons.length - index - 1;
+  const maxIndex = itemsList.length - index - 1;
   const value = getRandomIndex(0, maxIndex);
-  addClassList(element, iconsCopy[value]) ;
+  addClassList(element, itemsListCopy[value]) ;
+  // element.innerText = itemsListCopy[value]
   cells.push({
     cell: index,
-    value: iconsCopy[value],
+    value: itemsListCopy[value],
   });
-  iconsCopy.splice(value, 1);
+  itemsListCopy.splice(value, 1);
 });
-
-
-
-// item.forEach((element, index) => {
-//   const maxIndex = numbers.length - index - 1;
-//   const value = getRandomIndex(0, maxIndex);
-//   const innerIcon = getIcons(16)
-//   element.innerText = numbersCopy[value];
-//   cells.push({
-//     cell: index,
-//     value: numbersCopy[value],
-//   });
-//   numbersCopy.splice(value, 1);
-// });
