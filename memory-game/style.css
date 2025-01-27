@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section{
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    width: 320px;
+    height: 320px;
+}
+
+.item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    width: 100%;
+}
