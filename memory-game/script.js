@@ -1,70 +1,86 @@
 const $ = (el) => document.querySelector(el);
 const $$ = (els) => document.querySelectorAll(els);
-const addClassList = (el,cl) => el.classList.add(cl) 
+const addClassList = (el, cl) => el.classList.add(cl);
+const newElement = (el) => document.createElement(el)
 
-const item = $$(".fa-solid");
-const cells = [];
+const themeList = $$(".theme")
+const playersList = $$(".players")
+const sizeList = $$(".size")
+const buttonStartGame = $(".start");
+const containerBoard = $('.container')
 const iconList = [
-    "fa-code",
-    "fa-dragon",
-    "fa-ghost",
-    "fa-puzzle-piece",
-    "fa-bug",
-    "fa-frog",
-    "fa-cat",
-    "fa-motorcycle",
-    "fa-meteor",
-    "fa-user-secret",
-    "fa-dog",
-    "fa-hand-fist",
-    "fa-dice",
-    "fa-heart",
-    "fa-tree",
-    "fa-droplet",
-];
-const theme = $$('.theme')
-const players = $$('.players')
-const size = $$('.size')
+  "",
+  "fa-dragon",
+  "fa-ghost",
+  "fa-puzzle-piece",
+  "fa-bug",
+  "fa-frog",
+  "fa-cat",
+  "fa-motorcycle",
+  "fa-meteor",
+  "fa-user-secret",
+  "fa-dog",
+  "fa-hand-fist",
+  "fa-dice",
+  "fa-heart",
+  "fa-tree",
+  "fa-droplet",
+  "fa-code",
+]
+const cells = []
+let themeSelect = ''
+let playersSelect = ''
+let sizeSelect = ''
 
-// let theme1 = ''
 
-// theme.forEach((element) => {
-//   if (element.checked) {
-//     theme1 = element.value
-//   }
-// })
+buttonStartGame.addEventListener("click", () => {
+  themeSelect = getSettings(themeList)
+  playersSelect = Number(getSettings(playersList))
+  sizeSelect = Number(getSettings(sizeList))
+  createBoard()
+  const itemsList = getItemsList()
+  getRandomValue(itemsList)
+});
 
 function getSettings(array) {
-  array.forEach((element) => {
-    if (element.checked) {
-      return element.value
-    }
-    element.addEventListener('click', function (e) {
-      return e.target.value
-    })
-  })
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index]
+    if (element.checked) return element.value
+  }
+};
+
+function createBoard() {
+  if (!sizeSelect) return
+  for (let index = 0; index < sizeSelect; index++) {
+    const newDiv = document.createElement('div')
+    addClassList(newDiv,'cell')
+    containerBoard.appendChild(newDiv)
+    createHtmlItem(newDiv)
+  }
 }
 
-// getSettings(theme);
-// getSettings(players);
-// getSettings(size);
+function createHtmlItem(element) {
+  if (!themeSelect) return
+  let newHTML = ''
+  if (themeSelect === 'numbers') {
+    newHTML = `<p class="item"></p>`
+  } else {
+    newHTML = `<i class="item fa-solid"></i>`
+  }
+  element.innerHTML = newHTML
+}
 
-const themeSelect = getSettings(theme)
-const playersSelect = getSettings(players)
-const sizeSelect = getSettings(size)
-const itemsList = getItems(16)
-const itemsListCopy = [...itemsList]
-
-function getItems(length) {
+function getItemsList() {
+  if (!themeSelect) return
   const newArray = []
-  let item = ''
-  for (let index = 0; index < length; index++) {
+  for (let index = 0; index < sizeSelect; index++) {
+    let item = ''
     if (themeSelect === 'numbers') {
-      item = length / 2 <= index ? length - index : index + 1
+      item = sizeSelect / 2 <= index ? sizeSelect - index : index + 1
     } else {
-      item = length / 2 <= index ? iconList[length - index] : iconList[index + 1]
+      item = sizeSelect / 2 <= index ? iconList[sizeSelect - index] : iconList[index + 1]
     }
-    newArray.push(item)
+    newArray.push(item) 
   }
   return newArray
 }
@@ -73,14 +89,17 @@ function getRandomIndex(min, max) {
   return Math.floor(Math.random() * (max - min + 1));
 }
 
-item.forEach((element, index) => {
-  const maxIndex = itemsList.length - index - 1;
-  const value = getRandomIndex(0, maxIndex);
-  addClassList(element, itemsListCopy[value]) ;
-  // element.innerText = itemsListCopy[value]
-  cells.push({
-    cell: index,
-    value: itemsListCopy[value],
+function getRandomValue(array) {
+  const item = $$('.item')
+  item.forEach((element, index) => {
+    const maxIndex = sizeSelect - index - 1;
+    const value = getRandomIndex(0, maxIndex);
+    if (themeSelect === 'numbers') element.innerText = array[value];
+    if (themeSelect === 'icons') addClassList(element, array[value]);
+    cells.push({
+      cell: index,
+      value: array[value],
+    });
+    array.splice(value, 1);
   });
-  itemsListCopy.splice(value, 1);
-});
+}
