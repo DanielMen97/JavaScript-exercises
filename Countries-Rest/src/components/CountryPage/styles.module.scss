@@ -1,0 +1,129 @@
+@use "../../theme.scss";
+
+.country__navbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 130px;
+  width: 100%;
+  padding: 0 50px;
+
+  .navbar__button {
+    gap: 15px;
+    padding: 10px 30px;
+    border: none;
+    background-color: var(--color-elements);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+    color: var(--color-text);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+.country__article {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  padding: 0 50px;
+
+  .article__flag {
+    width: 600px;
+    height: 400px;
+    object-fit: contain;
+    object-position: top;
+  }
+
+  .article__info {
+    width: 640px;
+    padding: 40px 0 30px 0;
+    color: var(--color-text);
+
+    .info__name {
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .info__descriptions {
+      display: grid;
+      grid-template-columns: auto auto;
+      row-gap: 5px;
+      grid-template-areas:
+        "native top"
+        "population currencies"
+        "region languages"
+        "sub ."
+        "capital .";
+      margin-bottom: 40px;
+    }
+
+    .info__borders {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 25px;
+      color: var(--color-text);
+
+      .borders__container {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        column-gap: 20px;
+        row-gap: 15px;
+
+        .container__item {
+          text-align: center;
+          background-color: var(--color-elements);
+          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+          padding: 2px 25px;
+          font-size: 13px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .country__navbar {
+    height: 100px;
+    padding: 0 25px;
+  }
+
+  .country__article {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 25px 25px 25px;
+
+    .article__flag {
+      width: 100%;
+      height: 225px;
+    }
+
+    .article__info {
+      width: 100%;
+      padding: 0;
+
+      .info__name {
+        font-size: 20px;
+      }
+
+      .info__descriptions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 12px;
+        margin-bottom: 30px;
+      }
+
+      .info__borders {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 10px;
+
+        .borders__label{
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.navbar__inputGroup {
+    width: 450px;
+    height: 100%;
+    padding-left: 25px;
+    background-color: var(--color-elements);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    gap: 20px;
+
+    .inputGroup__icon {
+      color: var(--color-input);
+      font-size: 15px;
+    }
+
+    .inputGroup__input {
+      background-color: transparent;
+      border: none;
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      color:var(--color-text);
+
+      &:focus {
+        outline: none;
+      }
+      &::placeholder{
+        color: var(--color-input);
+      }
+    }
+  }
+
+  @media (max-width: 376p) {
+    .navbar__inputGroup {
+      width: 100%;
+  
+      .inputGroup__input {
+        font-size: 12px;
+      }
+    }
+  }

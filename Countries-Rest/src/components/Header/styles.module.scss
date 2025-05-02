@@ -1,0 +1,33 @@
+@use "../../theme.scss";
+
+.header{
+  width: 100%;
+  padding: 20px 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-elements);
+
+  .header__title {
+    font-weight: 800;
+    color: var(--color-text);
+  }
+
+  .header__darkmode {
+    cursor: pointer;
+    gap: 10px;
+    color: var(--color-text);
+  }
+}
+
+@media (max-width: 376px) {
+  .header{
+    padding: 20px;
+
+    .header__title{
+      font-size: 15px;
+    }
+
+    .header__darkmode{
+      font-size: 13px;
+    }
+  }
+}
