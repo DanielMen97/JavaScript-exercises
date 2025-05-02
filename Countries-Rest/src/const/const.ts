@@ -1,3 +1,5 @@
+// TODO: Si son constantes, se nombran en mayusculas
+
 export const ContextGlobalDefault = {
   handleSelectChange: () => {},
   handleInputChange: () => {},

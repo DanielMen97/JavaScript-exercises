@@ -17,6 +17,8 @@ const Countries = () => {
       <section className={styles.countries__list}>
         {filterCountries.map((country) => {
           const { name, flags, population, region, capital } = country;
+
+          // TODO: Este hasCapital se repite en el useCustomContext, no hacer codigo repetido.
           const hasCapital = capital ? capital[0] : "N/A";
           return (
             <CountryCard

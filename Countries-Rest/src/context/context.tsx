@@ -17,12 +17,15 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
     search: "",
   });
 
+
   useEffect(() => {
+    // TODO: Que pasa si hay un error en la peticion?
     getAllCountries().then((data) => {
       setCountries(data);
     });
   }, []);
 
+  // TODO: Esto no va
   const filterCountries = countries.filter((country) => {
     const countryNameLower = country.name.common.toLowerCase();
     return (
@@ -37,6 +40,7 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) =>
     setFilters({ ...filters, region: event.target.value });
 
+  // TODO: Cuando haga click y se seleccione el pais hacer toda la logica que esta en el useCustomContext hook.
   const handleClick = (nameCountry: string) => {
     const countrySelect = countries.find(
       (country) => country.name.common === nameCountry

@@ -5,6 +5,8 @@ import { context } from "../context/context";
 export const useCustomContext = () => {
   const data = useContext(context);
 
+  // TODO: Mover toda esta logica a nivel de context, pero que se haga la transformacion del country seleccionado en un servicio.
+
   const {
     flags,
     population,
@@ -47,6 +49,8 @@ export const useCustomContext = () => {
     Currencies: listCurrencies.join(", "),
     Languages: listLanguages.join(", "),
   };
+
+  // TODO: No necesita todo ser un array iterable como un objeto funciona por si solo.
   const formatInfoToArray = Object.entries(formatInfo);
   const countryName = name.common;
 
