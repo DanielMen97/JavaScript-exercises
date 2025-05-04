@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import { useCustomContext } from "../../hooks/useContext";
-import { regions } from "../../const/const";
+import { REGIONS } from "../../const/const";
 
 const CustomSelect = () => {
 
@@ -15,7 +15,7 @@ const CustomSelect = () => {
         <option className={styles.select__option} selected hidden>
           Filter by Region
         </option>
-        {regions.map((region) => (
+        {REGIONS.map((region) => (
           <option key={region} className={styles.select__option} value={region}>
             <span className={styles.option__span}>{region}</span>
           </option>

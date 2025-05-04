@@ -1,9 +1,9 @@
 import styles from "./styles.module.scss";
 import '../../index.css'
-import { countryI } from "../../types";
+import { CountryInfoCard } from "../../types";
 import { useCustomContext } from "../../hooks/useContext";
 
-const CountryCard: React.FC<countryI> = ({flags,name,population,region,capital}) => {
+const CountryCard: React.FC<CountryInfoCard> = ({flags,name,population,region,capital}) => {
 
   const { handleClick } = useCustomContext()
 

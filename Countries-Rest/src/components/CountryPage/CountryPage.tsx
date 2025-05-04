@@ -5,7 +5,7 @@ import "../../index.css";
 const CountryPage = () => {
   const { country, handleBack } = useCustomContext();
 
-  const { name, flags, descriptions, hasBorders } = country;
+  const { name, flags, descriptions, borders } = country;
 
   return (
     <>
@@ -20,22 +20,19 @@ const CountryPage = () => {
         <aside className={styles.article__info}>
           <h1 className={styles.info__name}>{name}</h1>
           <section className={styles.info__descriptions}>
-            {descriptions.map((description) => {
-              const gridArea = description[0]
-                .split(" ", 1)
-                .join()
-                .toLowerCase();
+            {Object.entries(descriptions).map(([key, value]) => {
+              const gridArea = key.split(" ", 1).join().toLowerCase();
               return (
                 <p
                   className={styles.descriptions__item}
                   style={{ gridArea }}
-                  key={description[0]}
+                  key={key}
                 >
                   <strong>
-                    {description[0]}
+                    {key}
                     {": "}
                   </strong>
-                  {description[1]}
+                  {value}
                 </p>
               );
             })}
@@ -45,7 +42,7 @@ const CountryPage = () => {
               <strong>Border Countries: </strong>
             </p>
             <div className={styles.borders__container}>
-              {hasBorders.map((border) => (
+              {borders.map((border) => (
                 <span className={styles.container__item} key={border}>
                   {border}
                 </span>

@@ -1,36 +1,42 @@
 import { ReactNode, createContext } from "react";
-import { getAllCountries } from "../services/Services";
+import { getAllCountries, transformCountryInfo } from "../services/Services";
 import { ChangeEvent, useEffect, useState } from "react";
-import { ContextGlobalI, CountryOriginI } from "../types";
-import { countryDefault } from "../const/const";
-
-type CountriesType = CountryOriginI[];
+import { ContextGlobalI } from "../types";
+import { TransformCountry } from "../models/global";
+import { CONTEXT_GLOBAL_DEFAULT, TRANSFORM_COUNTRY_DEFAULT } from "../const/const";
 
 // Create a context with a default value
-export const context = createContext<ContextGlobalI>({} as ContextGlobalI);
+export const context = createContext<ContextGlobalI>({
+  ...CONTEXT_GLOBAL_DEFAULT,
+});
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
-  const [countries, setCountries] = useState<CountriesType>([]);
-  const [country, setCountry] = useState<CountryOriginI>({ ...countryDefault });
+  const [countries, setCountries] = useState<TransformCountry[]>([{...TRANSFORM_COUNTRY_DEFAULT}]);
+  const [country, setCountry] = useState<TransformCountry>({
+    ...TRANSFORM_COUNTRY_DEFAULT,
+  });
   const [filters, setFilters] = useState({
-    region: "all",
+    region: "All",
     search: "",
   });
 
-
   useEffect(() => {
     // TODO: Que pasa si hay un error en la peticion?
-    getAllCountries().then((data) => {
-      setCountries(data);
-    });
+    getAllCountries()
+      .then((data) => {
+        const formatCountries = transformCountryInfo(data);
+        setCountries(formatCountries);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   // TODO: Esto no va
   const filterCountries = countries.filter((country) => {
-    const countryNameLower = country.name.common.toLowerCase();
+    const countryNameLower = country.name.toLowerCase();
     return (
       countryNameLower.includes(filters.search.toLowerCase()) &&
-      (filters.region === "all" || country.region === filters.region)
+      (filters.region === "All" ||
+        country.descriptions.Region === filters.region)
     );
   });
 
@@ -43,14 +49,14 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   // TODO: Cuando haga click y se seleccione el pais hacer toda la logica que esta en el useCustomContext hook.
   const handleClick = (nameCountry: string) => {
     const countrySelect = countries.find(
-      (country) => country.name.common === nameCountry
+      (country) => country.name === nameCountry
     );
     if (countrySelect) {
       setCountry(countrySelect);
     }
   };
 
-  const handleBack = () => setCountry({ ...countryDefault });
+  const handleBack = () => setCountry({...TRANSFORM_COUNTRY_DEFAULT});
 
   const value = {
     handleSelectChange,

@@ -1,3 +1,5 @@
+import { TransformCountry } from "./models/global";
+
 interface NameI {
   common: string; // Common name of the country
   official: string; // Official name of the country
@@ -37,12 +39,12 @@ interface LanguagesI {
   [key: string]: string
 }
 
-export interface countryI {
+export interface CountryInfoCard {
   flags: string; // Object of URLs to the flag image
   name: string; // Object of Names of the country
-  population: number; // Population of the country
+  population: string; // Population of the country
   region: string; // Region of the country
-  capital: string | undefined; // Capital city of the country
+  capital: string; // Capital city of the country
 }
 
 export interface CountryOriginI {
@@ -77,10 +79,10 @@ export interface CountryDetailsI {
 export interface ContextGlobalI {
   handleSelectChange : (event: ChangeEvent<HTMLSelectElement>) => void,
   handleInputChange : (event: ChangeEvent<HTMLInputElement>) => void,
-  filterCountries : CountryOriginI[],
-  handleClick : (string) => void,
-  country: CountryOriginI,
-  countries: CountryOriginI[],
+  filterCountries : TransformCountry[],
+  handleClick : (nameCountry:string) => void,
+  country: TransformCountry,
+  countries: TransformCountry[],
   handleBack: () => void
 }
 
