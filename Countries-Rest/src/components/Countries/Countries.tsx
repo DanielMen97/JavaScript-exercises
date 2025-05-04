@@ -16,12 +16,12 @@ const Countries = () => {
       </nav>
       <section className={styles.countries__list}>
         {filterCountries.map((country) => {
-          const { cioc, name, flags, descriptions } = country;
+          const { name, flags, descriptions } = country;
           // TODO: Este hasCapital se repite en el useCustomContext, no hacer codigo repetido.
           return (
             <CountryCard
-              key={cioc}
-              flags={flags.png}
+              key={name}
+              flag={flags.png}
               name={name}
               population={descriptions.Population}
               region={descriptions.Region}

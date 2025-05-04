@@ -2,16 +2,18 @@ import styles from "./styles.module.scss";
 import '../../index.css'
 import { CountryInfoCard } from "../../types";
 import { useCustomContext } from "../../hooks/useContext";
+import image from '../../assets/flag.png'
 
-const CountryCard: React.FC<CountryInfoCard> = ({flags,name,population,region,capital}) => {
+const CountryCard: React.FC<CountryInfoCard> = ({flag,name,population,region,capital}) => {
 
   const { handleClick } = useCustomContext()
+  const hasFlag = flag ? flag : image
 
   return (
     <article className={styles.list__countryCard} onClick={() => handleClick(name)}>
       <img
         className={styles.countryCard__flat}
-        src={flags}
+        src={hasFlag}
         alt="Country Flag"
       />
       <div className={`${styles.countryCard__info} center-start`}>

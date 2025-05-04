@@ -40,7 +40,7 @@ interface LanguagesI {
 }
 
 export interface CountryInfoCard {
-  flags: string; // Object of URLs to the flag image
+  flag: string; // Object of URLs to the flag image
   name: string; // Object of Names of the country
   population: string; // Population of the country
   region: string; // Region of the country
