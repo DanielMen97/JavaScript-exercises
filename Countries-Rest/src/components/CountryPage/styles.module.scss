@@ -21,20 +21,21 @@
 }
 .country__article {
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  justify-content: space-around;
+  gap: 40px;
   padding: 0 50px;
 
   .article__flag {
     width: 600px;
-    height: 400px;
+    min-width: 440px;
     object-fit: contain;
     object-position: top;
   }
 
   .article__info {
-    width: 640px;
-    padding: 40px 0 30px 0;
+    width: 600px;
+    min-width: 440px;
+    padding-top: 20px;
     color: var(--color-text);
 
     .info__name {
@@ -64,13 +65,15 @@
       color: var(--color-text);
 
       .borders__container {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        column-gap: 20px;
-        row-gap: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 100%;
 
         .container__item {
           text-align: center;
+          width: fit-content;
+          height: 22px;
           background-color: var(--color-elements);
           box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
           padding: 2px 25px;
@@ -82,12 +85,11 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 1020px) {
   .country__navbar {
     height: 100px;
     padding: 0 25px;
   }
-
   .country__article {
     flex-direction: column;
     gap: 30px;
@@ -95,22 +97,18 @@
 
     .article__flag {
       width: 100%;
-      height: 225px;
+      height: 300px;
     }
 
     .article__info {
+      min-width: fit-content;
       width: 100%;
       padding: 0;
-
-      .info__name {
-        font-size: 20px;
-      }
 
       .info__descriptions {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        font-size: 12px;
         margin-bottom: 30px;
       }
 
@@ -119,8 +117,33 @@
         align-items: flex-start;
         justify-content: center;
         gap: 10px;
+      }
+    }
+  }
+}
 
-        .borders__label{
+@media (max-width: 574px) {
+  .country__navbar {
+    height: 100px;
+    padding: 0 25px;
+  }
+
+  .country__article {
+    .article__flag {
+      height: 225px;
+    }
+
+    .article__info {
+      .info__name {
+        font-size: 20px;
+      }
+
+      .info__descriptions {
+        font-size: 12px;
+      }
+
+      .info__borders {
+        .borders__label {
           font-size: 14px;
         }
       }

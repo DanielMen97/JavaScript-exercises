@@ -1,5 +1,6 @@
 .navbar__inputGroup {
     width: 450px;
+    min-width: 255px;
     height: 100%;
     padding-left: 25px;
     background-color: var(--color-elements);
@@ -29,7 +30,7 @@
     }
   }
 
-  @media (max-width: 376p) {
+  @media (max-width: 574px) {
     .navbar__inputGroup {
       width: 100%;
   

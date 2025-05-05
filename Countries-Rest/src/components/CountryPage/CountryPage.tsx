@@ -1,11 +1,13 @@
 import { useCustomContext } from "../../hooks/useContext";
 import styles from "./styles.module.scss";
 import "../../index.css";
+import { getNamesFromCodes } from "../../services/Services";
 
 const CountryPage = () => {
-  const { country, handleBack } = useCustomContext();
+  const { country, handleBack, countries } = useCustomContext();
 
   const { name, flags, descriptions, borders } = country;
+  const bordersNames = getNamesFromCodes(borders, countries)
 
   return (
     <>
@@ -42,7 +44,7 @@ const CountryPage = () => {
               <strong>Border Countries: </strong>
             </p>
             <div className={styles.borders__container}>
-              {borders.map((border) => (
+              {bordersNames.map((border) => (
                 <span className={styles.container__item} key={border}>
                   {border}
                 </span>

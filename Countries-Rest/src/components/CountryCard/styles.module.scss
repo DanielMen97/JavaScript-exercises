@@ -1,7 +1,7 @@
 @use '../../theme.scss';
 
 .list__countryCard {
-  width: 100%;
+  width: 267px;
   height: 100%;
   background-color: var(--color-elements);
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
@@ -11,8 +11,8 @@
   .countryCard__flat {
     width: 100%;
     height: 188px;
-    object-fit: cover;
     border-radius: 5px 5px 0 0;
+    object-fit: fill;
   }
 
   .countryCard__info {

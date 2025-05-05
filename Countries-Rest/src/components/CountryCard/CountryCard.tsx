@@ -19,7 +19,7 @@ const CountryCard: React.FC<CountryInfoCard> = ({flag,name,population,region,cap
       <div className={`${styles.countryCard__info} center-start`}>
         <h3 className={styles.info__name}>{name}</h3>
         <p className={styles.info__description}>
-          <strong>Population:</strong> {population.toLocaleString()}
+          <strong>Population:</strong> {population}
         </p>
         <p className={styles.info__description}>
           <strong>Region:</strong> {region}

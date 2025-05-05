@@ -1,5 +1,6 @@
 .navbar__selectGroup {
   width: 250px;
+  min-width: 180px;
   height: 100%;
   background-color: var(--color-elements);
   box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
@@ -59,7 +60,7 @@
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 574px) {
   .navbar__selectGroup {
     width: 168px;
   

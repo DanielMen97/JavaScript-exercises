@@ -13,13 +13,7 @@ export const getAllCountries = () => {
     .catch((error) => console.error(error));
 };
 
-export function getNamesFromCodes({
-  codes,
-  countries,
-}: {
-  codes: string[] | undefined;
-  countries: TransformCountry[];
-}) {
+export function getNamesFromCodes(codes: string[], countries: TransformCountry[]) {
   if (codes === undefined) return ["N/A"];
   const countriesName = codes
     .map((code) => countries.find((country) => country.cioc === code)?.name)
