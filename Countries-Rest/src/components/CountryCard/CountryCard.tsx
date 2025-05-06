@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import '../../index.css'
-import { CountryInfoCard } from "../../types";
+import { CountryInfoCard } from "../../models/country";
 import { useCustomContext } from "../../hooks/useContext";
 import image from '../../assets/flag.png'
 

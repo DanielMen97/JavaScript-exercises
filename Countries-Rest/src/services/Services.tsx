@@ -1,16 +1,16 @@
 import { TransformCountry } from "../models/global";
-import { CountryOriginI } from "../types";
+import { CountryOriginI } from "../models/global";
 
 const URL_REST_COUNTRIES = "https://restcountries.com/v3.1/all";
-// TODO: Mejorar la legibilidad de la funcion
-// TODO: Que pasa si hay un error en la peticion?
 export const getAllCountries = () => {
   return fetch(URL_REST_COUNTRIES, {
     method: "GET",
   })
     .then((response) => response.json())
     .then((data) => data)
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      throw new Error(error)
+    });
 };
 
 export function getNamesFromCodes(codes: string[], countries: TransformCountry[]) {
@@ -28,8 +28,7 @@ function getValuesFromObject(values: any): any[] {
   return [];
 }
 
-export function transformCountryInfo(countries: CountryOriginI[]) {
-  // TODO: Mover toda esta logica a nivel de context, pero que se haga la transformacion del country seleccionado en un servicio.
+export function transformCountryInfo(countries: CountryOriginI[]): TransformCountry[] {
   return countries.map((country) => {
     const {
       flags,
@@ -61,7 +60,7 @@ export function transformCountryInfo(countries: CountryOriginI[]) {
       Languages: getValuesFromObject(languages).join(", "),
     };
 
-    // TODO: No necesita todo ser un array iterable como un objeto funciona por si solo.
+
     return {
       cioc,
       name: name.common,

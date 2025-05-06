@@ -5,12 +5,19 @@ import { useCustomContext } from "./hooks/useContext";
 import "./index.css";
 
 const App = () => {
-  const { country } = useCustomContext();
+  const { state } = useCustomContext();
+
+  const { error, country } = state;
   return (
     <>
       <Header />
-      {!country.name && <Countries />}
-      {country.name && <CountryPage />}
+      {error && (
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          Error al consultar la información
+        </p>
+      )}
+      {!error && !country.name && <Countries />}
+      {!error && country.name && <CountryPage />}
     </>
   );
 };

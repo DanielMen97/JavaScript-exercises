@@ -1,71 +1,76 @@
-import { ReactNode, createContext } from "react";
+import { ReactNode, createContext, useReducer } from "react";
 import { getAllCountries, transformCountryInfo } from "../services/Services";
 import { ChangeEvent, useEffect, useState } from "react";
-import { ContextGlobalI } from "../types";
-import { TransformCountry } from "../models/global";
-import { CONTEXT_GLOBAL_DEFAULT, TRANSFORM_COUNTRY_DEFAULT } from "../const/const";
+import { GlobalContextI, globalContextDefault} from "../models/global";
+import { globalReducer } from "../reducers/globalReducer";
+import { GlobalReducerAction, globalStateDefault } from "../models/reducer";
+import { RegionsFiltersType } from "../models/filters";
+import { countryTransformDefault } from "../models/country";
 
-// Create a context with a default value
-export const context = createContext<ContextGlobalI>({
-  ...CONTEXT_GLOBAL_DEFAULT,
+export const context = createContext<GlobalContextI>({
+  ...globalContextDefault,
 });
 
 export const ContextProvider = ({ children }: { children: ReactNode }) => {
-  const [countries, setCountries] = useState<TransformCountry[]>([{...TRANSFORM_COUNTRY_DEFAULT}]);
-  const [country, setCountry] = useState<TransformCountry>({
-    ...TRANSFORM_COUNTRY_DEFAULT,
-  });
-  const [filters, setFilters] = useState({
-    region: "All",
-    search: "",
-  });
+  const [state, dispatch] = useReducer(globalReducer, {...globalStateDefault});
 
   useEffect(() => {
-    // TODO: Que pasa si hay un error en la peticion?
+
     getAllCountries()
       .then((data) => {
         const formatCountries = transformCountryInfo(data);
-        setCountries(formatCountries);
+        dispatch({
+          type: GlobalReducerAction.SaveCountries,
+          payload: formatCountries,
+        });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch({
+          type: GlobalReducerAction.SaveError,
+          payload: error
+        });
+      });
   }, []);
+ 
 
-  // TODO: Esto no va
-  const filterCountries = countries.filter((country) => {
-    const countryNameLower = country.name.toLowerCase();
-    return (
-      countryNameLower.includes(filters.search.toLowerCase()) &&
-      (filters.region === "All" ||
-        country.descriptions.Region === filters.region)
-    );
-  });
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: GlobalReducerAction.SaveFilters,
+      payload: {...state.filters, search: event.target.value}
+    })
+  };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
-    setFilters({ ...filters, search: event.target.value });
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const region = event.target.value as RegionsFiltersType
+    dispatch({
+      type: GlobalReducerAction.SaveFilters,
+      payload: {...state.filters, region}
+    })
+  };
 
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) =>
-    setFilters({ ...filters, region: event.target.value });
-
-  // TODO: Cuando haga click y se seleccione el pais hacer toda la logica que esta en el useCustomContext hook.
   const handleClick = (nameCountry: string) => {
-    const countrySelect = countries.find(
+    const countrySelect = state.countries.find(
       (country) => country.name === nameCountry
     );
     if (countrySelect) {
-      setCountry(countrySelect);
+      dispatch({
+        type: GlobalReducerAction.SaveCountry,
+        payload: countrySelect,
+      });
     }
   };
 
-  const handleBack = () => setCountry({...TRANSFORM_COUNTRY_DEFAULT});
+  const handleBack = () => dispatch({
+    type: GlobalReducerAction.SaveCountry,
+    payload: {...countryTransformDefault},
+  });
 
-  const value = {
+  const value: GlobalContextI = {
+    state,
     handleSelectChange,
     handleInputChange,
-    filterCountries,
     handleClick,
-    country,
-    countries,
-    handleBack,
+    handleBack
   };
   return <context.Provider value={value}>{children}</context.Provider>;
 };

@@ -1,20 +1,21 @@
-import { FlagsI } from "../types";
+import { ChangeEvent } from "react";
+import { globalStateDefault, StateGlobalI } from "./reducer";
 
-interface DescriptionI {
-  "Native Name": string,
-  Population: string,
-  Region: string,
-  "Sub Region": string,
-  Capital: string,
-  "Top Level Domain": string,
-  Currencies: string,
-  Languages: string,
+export type OnChangeSelect = (event:ChangeEvent<HTMLSelectElement>) => void
+export type OnChangeInput = (event: ChangeEvent<HTMLInputElement>) => void
+
+export interface GlobalContextI {
+  state: StateGlobalI,
+  handleBack: () => void,
+  handleClick : (nameCountry:string) => void,
+  handleInputChange : OnChangeInput,
+  handleSelectChange : OnChangeSelect,
 }
 
-export interface TransformCountry {
-  cioc: string;
-  name: string;
-  flags: FlagsI;
-  descriptions: DescriptionI;
-  borders: string[];
-}
+export const globalContextDefault: GlobalContextI  = {
+  state: globalStateDefault,
+  handleBack: () => {},
+  handleClick: () => {},
+  handleInputChange: () => {},
+  handleSelectChange: () => {},
+};

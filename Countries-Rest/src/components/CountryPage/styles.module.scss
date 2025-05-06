@@ -47,7 +47,7 @@
     .info__descriptions {
       display: grid;
       grid-template-columns: auto auto;
-      row-gap: 5px;
+      gap: 5px;
       grid-template-areas:
         "native top"
         "population currencies"

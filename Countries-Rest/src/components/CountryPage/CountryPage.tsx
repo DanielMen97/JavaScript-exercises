@@ -4,10 +4,10 @@ import "../../index.css";
 import { getNamesFromCodes } from "../../services/Services";
 
 const CountryPage = () => {
-  const { country, handleBack, countries } = useCustomContext();
+  const { state, handleBack } = useCustomContext();
 
-  const { name, flags, descriptions, borders } = country;
-  const bordersNames = getNamesFromCodes(borders, countries)
+  const { name, flags, descriptions, borders } = state.country;
+  const bordersNames = getNamesFromCodes(borders, state.countries)
 
   return (
     <>

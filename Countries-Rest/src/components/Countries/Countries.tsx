@@ -6,7 +6,9 @@ import { useCustomContext } from "../../hooks/useContext";
 import { CustomInput } from "../CustomInput/CustomInput";
 
 const Countries = () => {
-  const { filterCountries } = useCustomContext();
+  const { state } = useCustomContext();
+
+  const countriesToMap = state.filterCountries.length > 0 ? state.filterCountries : state.countries
 
   return (
     <main className={styles.countries}>
@@ -15,9 +17,8 @@ const Countries = () => {
         <CustomSelect />
       </nav>
       <section className={styles.countries__list}>
-        {filterCountries.map((country) => {
+        {countriesToMap.map((country) => {
           const { name, flags, descriptions } = country;
-          // TODO: Este hasCapital se repite en el useCustomContext, no hacer codigo repetido.
           return (
             <CountryCard
               key={name}
