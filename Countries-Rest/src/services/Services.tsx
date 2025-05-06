@@ -1,0 +1,72 @@
+import { TransformCountry } from "../models/global";
+import { CountryOriginI } from "../models/global";
+
+const URL_REST_COUNTRIES = "https://restcountries.com/v3.1/all";
+export const getAllCountries = () => {
+  return fetch(URL_REST_COUNTRIES, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => data)
+    .catch((error) => {
+      throw new Error(error)
+    });
+};
+
+export function getNamesFromCodes(codes: string[], countries: TransformCountry[]) {
+  if (codes === undefined) return ["N/A"];
+  const countriesName = codes
+    .map((code) => countries.find((country) => country.cioc === code)?.name)
+    .filter((code) => code !== undefined);
+  return countriesName.length > 0 ? countriesName : ["N/A"];
+}
+
+function getValuesFromObject(values: any): any[] {
+  if (values) {
+    return Object.values(values);
+  }
+  return [];
+}
+
+export function transformCountryInfo(countries: CountryOriginI[]): TransformCountry[] {
+  return countries.map((country) => {
+    const {
+      flags,
+      population,
+      tld,
+      name,
+      region,
+      subregion,
+      capital,
+      currencies,
+      languages,
+      borders,
+      cioc,
+    } = country;
+
+    const listNatives = getValuesFromObject(name.nativeName);
+    const nativeName = listNatives[listNatives.length - 1]?.common;
+    const listCurrencies = getValuesFromObject(currencies)
+      .map((currency) => currency.name)
+      .join(", ");
+    const formatInfo = {
+      "Native Name": nativeName,
+      Population: population.toLocaleString(),
+      Region: region,
+      "Sub Region": subregion,
+      Capital: capital ? capital[0] : "N/A",
+      "Top Level Domain": tld ? tld.join(", ") : "N/A",
+      Currencies: listCurrencies,
+      Languages: getValuesFromObject(languages).join(", "),
+    };
+
+
+    return {
+      cioc,
+      name: name.common,
+      flags,
+      descriptions: formatInfo,
+      borders: borders ? borders : ["N/A"],
+    };
+  });
+}
