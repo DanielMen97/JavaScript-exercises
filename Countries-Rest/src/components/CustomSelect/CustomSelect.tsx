@@ -18,9 +18,9 @@ const CustomSelect = () => {
         <option className={styles.select__option} value={'All'} hidden>
           Filter by Region
         </option>
-        {regions.map((region) => (
-          <option key={region[0]} className={styles.select__option} value={region[0]}>
-            {region[0]}
+        {regions.map(([key, value]) => (
+          <option key={key} className={styles.select__option} value={value}>
+            {value}
           </option>
         ))}
       </select>
