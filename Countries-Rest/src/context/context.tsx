@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useReducer } from "react";
 import { getAllCountries, transformCountryInfo } from "../services/Services";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { GlobalContextI, globalContextDefault} from "../models/global";
 import { globalReducer } from "../reducers/globalReducer";
 import { GlobalReducerAction, globalStateDefault } from "../models/reducer";
